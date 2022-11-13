@@ -1,0 +1,45 @@
+﻿@using MVCWorkshop.Data.Entities
+@model News
+
+
+
+
+
+
+<div class="card card-cascade wider" style="width: 30rem;">
+
+    <!-- Card image -->
+    <div class="view view-cascade overlay">
+        <img class="card-img-top" src="@(ViewData["BaseURL"]+"/Images/"+Model.ImageUrl)" alt="Card image cap">
+        <a href="#!">
+            <div class="mask rgba-white-slight"></div>
+        </a>
+    </div>
+
+    <!-- Card content -->
+    <div class="card-body card-body-cascade  pb-0" >
+
+        <!-- Title -->
+        <p class="blue-text pb-2 text-primary text-center">Category : @Model.Category.Name</p>
+        <h4 class="card-title"><strong>@Model.Title</strong></h4>
+        <!-- Subtitle -->
+        <!-- Text -->
+        <p class="card-text">
+            @Model.Body
+        </p>
+
+        <!-- Linkedin -->
+        <a class="px-2 fa-lg li-ic"><i class="fab fa-linkedin-in"></i></a>
+        <!-- Twitter -->
+        <a class="px-2 fa-lg tw-ic"><i class="fab fa-twitter"></i></a>
+        <!-- Dribbble -->
+        <a class="px-2 fa-lg fb-ic"><i class="fab fa-facebook-f"></i></a>
+
+        <!-- Card footer -->
+        <div class="card-footer text-muted text-center mt-4">
+            @Model.Date
+        </div>
+
+    </div>
+
+</div>

@@ -1,0 +1,10 @@
+﻿@using MVCWorkshop.Data.Entities
+@model Category
+
+<form class="" asp-controller="Categories" asp-action="EditCategory" method="post">
+    <div class="form-group">
+        <label class="" asp-for="Name"></label>
+        <input class="form-control" asp-for="Name" value="@Model.Name"/>
+    </div>
+    <button type="submit" class="btn btn-primary mt-4">Edit</button>
+</form>
