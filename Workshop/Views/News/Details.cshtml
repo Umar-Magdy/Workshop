@@ -6,15 +6,18 @@
 
 
 
-<div class="card card-cascade wider" style="width: 30rem;">
+<div class="card card-cascade wider" >
+    @if (!String.IsNullOrEmpty(Model.ImageUrl)){
 
-    <!-- Card image -->
-    <div class="view view-cascade overlay">
-        <img class="card-img-top" src="@(ViewData["BaseURL"]+"/Images/"+Model.ImageUrl)" alt="Card image cap">
-        <a href="#!">
-            <div class="mask rgba-white-slight"></div>
-        </a>
-    </div>
+        <!-- Card image -->
+        <div class="view view-cascade overlay">
+            <img class="card-img-top" src="@(ViewData["BaseURL"]+"/Images/"+Model.ImageUrl)" alt="Card image cap">
+            <a href="#!">
+                <div class="mask rgba-white-slight"></div>
+            </a>
+        </div>
+    }
+
 
     <!-- Card content -->
     <div class="card-body card-body-cascade  pb-0" >
@@ -39,6 +42,19 @@
         <div class="card-footer text-muted text-center mt-4">
             @Model.Date
         </div>
+        @if ((bool)ViewData["isAdmin"])
+        {
+            <div class="row justify-content-center mt-2 mb-2">
+                <form class="col-4 row ">
+                    <a type="button" class="btn btn-primary col-10" asp-controller="News" asp-action="EditNews" asp-route-Id="@Model.Id">Edit</a>
+                </form>
+
+                <form class="col-4 row " asp-controller="News" asp-action="DeleteNews" asp-route-Id="@Model.Id" method="post">
+                    <button type="submit" class="btn btn-danger col-10">Delete</button>
+                </form>
+            </div>
+
+        }
 
     </div>
 

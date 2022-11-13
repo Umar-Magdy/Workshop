@@ -1,12 +1,71 @@
-﻿@using MVCWorkshop.Data.Entities
+﻿@using MVCWorkshop.Models.ViewModels
 @{
     ViewData["Title"] = "Home Page";
+
+    var items = new SelectList(Model.Items, nameof(SelectListItem.Value), nameof(SelectListItem.Text));
 }
-@model IReadOnlyList<News>
+@model HomeVM
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
 </div>
-<h1>
-    @Model.Count Items
 
-</h1>
+<form  class="" asp-controller="Home" asp-action="Filter"  method="get">
+    <div class="row justify-content-center">
+        <select asp-for="selectedCategory" asp-items="@(items) " class="form-control col-4 m-3">
+            <option value="0">-Select Category-</option>
+        </select>
+        <button type="submit" class="btn btn-primary col-1  m-3">Filter</button>
+    </div>
+</form>
+
+<div class="row">
+
+    @for (int i = 0; i < Model.News.Count; i++)
+    {
+        <div class="col-4 card card-cascade wider">
+
+            @if (!String.IsNullOrEmpty(Model.News[i].ImageUrl))
+            {
+                <!-- Card image -->
+                <div class="row  ">
+                    <img class="col-10  justify-content-center" src="@(ViewData["BaseURL"]+"/Images/"+Model.News[i].ImageUrl)" style="max-width=200px;max-height:200px;object-fit: cover;" alt="Card image cap">
+                    <a href="#!">
+                        <div class="mask rgba-white-slight"></div>
+                    </a>
+                </div>
+                
+            }
+
+            <!-- Card content -->
+            <div class="card-body card-body-cascade  pb-0">
+
+                <!-- Title -->
+                <p class="blue-text pb-2 text-primary text-center">Category : @Model.News[i].Category.Name</p>
+                <h4 class="card-title"><strong>@Model.News[i].Title</strong></h4>
+                <!-- Subtitle -->
+                <!-- Text -->
+                <p class="card-text">
+                    @Model.News[i].Body
+                </p>
+
+                <!-- Linkedin -->
+                <a class="px-2 fa-lg li-ic"><i class="fab fa-linkedin-in"></i></a>
+                <!-- Twitter -->
+                <a class="px-2 fa-lg tw-ic"><i class="fab fa-twitter"></i></a>
+                <!-- Dribbble -->
+                <a class="px-2 fa-lg fb-ic"><i class="fab fa-facebook-f"></i></a>
+
+                <!-- Card footer -->
+
+
+            </div>
+            <div class="card-footer text-muted text-center mt-4">
+                @Model.News[i].Date
+                <a class="link-primary" asp-controller="News" asp-action="NewsDetails" asp-route-Id="@Model.News[i].Id">Details</a>
+            </div>
+
+        </div>
+
+    }
+
+</div>

@@ -17,7 +17,7 @@ namespace MVCWorkshop.Data.DbConfigurations
             builder.Property(x => x.Body).IsRequired();
             builder.Property(x => x.Body).HasMaxLength(int.MaxValue);
 
-            builder.Property(x => x.Date).HasDefaultValue(DateTime.Now);
+            builder.Property(x => x.Date).HasDefaultValue(TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, TimeZoneInfo.FindSystemTimeZoneById(TimeZone.CurrentTimeZone.StandardName)));
 
             builder.Property(x => x.CategoryId).IsRequired();
 
